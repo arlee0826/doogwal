@@ -1,0 +1,397 @@
+#crewDetailHeader{
+    width: 1080px;
+    height: 70px;
+    background-color: #717171;
+    margin: 0 auto 30px auto;
+    border-bottom: 1px solid rgb(120, 120, 120);
+    position: relative;
+}
+.crew_detail_board_box{
+    font-size: 20px;
+    display: inline-block;
+    margin: 36px 0 0 240px;
+}
+.crew_detail_board_item{
+    display: inline-block;
+    color: white;
+    padding: 5px 20px;
+}
+.crew_detail_board_item:hover{
+    font-weight: bold;
+}
+.crew_detail_board_item input[type="radio"]{
+    display: none;
+}
+.crew_detail_board_item input[type="radio"]:checked + label{
+    font-weight: bold;
+    text-decoration: underline;
+}
+.crew_detail_board_item input[type="radio"] + label, .board_adding{
+    cursor: pointer;
+}
+.crew_operator_function_item{
+    display: inline-block;
+    padding: 5px 5px;
+}
+.crew_operator_function_item:hover{
+    font-weight: bold;
+}
+.crew_operator_function_item>a{
+    color: white;
+}
+.crew_operator_function_box{
+    font-size: 14px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.crew_applicant{
+    position: relative;
+}
+.crew_applicant::after{
+    content: "0";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -6px;
+    right: -7px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    background-color: rgba(255,183,89, 0.6);
+}
+#crewDetailContainer{
+    width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    background-color: #EEF0F3;
+    overflow: hidden;
+}
+#crewInformationSideBar{
+    width: 260px;
+    float: left;
+    margin-right: 10px;
+}
+.crew_information_box{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #bababa;
+}
+.crew_information_box img{
+    width: 220px;
+    height: 160px;
+    background-color: aqua;
+    margin-bottom: 10px;
+}
+.crew_name_box{
+    margin: 10px 0;
+}
+.crew_name{
+    font-size: 25px;
+}
+.crew_introduction{
+    font-size: 17px;
+}
+.meeting_information_box{
+    margin: 10px 0;
+    font-size: 17px;
+    text-align: center;
+}
+.meeting_history, .meeting_bring{
+    display: inline-block;
+    vertical-align: center;
+    margin: 10px 0;
+}
+.meeting_history:hover, .meeting_bring:hover{
+    color: #FFAB40;
+}
+.meeting_bring>i, .meeting_history>i{
+    font-size: 15px;
+    margin-right: 2px;
+}
+.crew_sex_ratio_box{
+    position: relative;
+    margin-top: 28px;
+    padding: 20px 0;
+    border: 1px solid #bababa;
+}
+.sex_ratio_male_image_box{
+    overflow: hidden;
+}
+.sex_ratio_male_image_box>img{
+    max-height: initial;
+}
+.sex_ratio_female_image_box{
+    overflow: hidden;
+}
+.sex_ratio_female_image_box>img{
+    max-height: initial;
+}
+/*.sex_ratio{*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    margin: 15px 0 0 10px;*/
+/*    font-size: 20px;*/
+/*    color: #424242;*/
+/*}*/
+.saemo_point_box{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+.saemo_point{
+    font-size: 18px;
+    margin-left: 17px;
+}
+.saemo_point::after{
+    content: "세모";
+    margin-left: 4px;
+}
+#crewPostContents{
+    width: 540px;
+    float: left;
+}
+.fixed_post_box{
+    /*position: relative;*/
+    width: 540px;
+}
+.crew_upcomming_event_box{
+    width: 538px;
+    height: 88px;
+    border: 1px solid #bababa;
+    margin-bottom: 10px;
+    position: relative;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.upcomming_event_name{
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px 0 0 30px;
+    text-decoration: underline;
+}
+.upcomming_event_spot{
+    font-size: 22px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 50px 0 0 30px;
+}
+.upcomming_event_participants{
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 59px 50px 0 0;
+}
+.upcomming_event_participants_list_box{
+    position: absolute;
+    background-color: rgba(66, 66, 66, 0.7);
+    top: 0;
+    left: 0;
+    margin: 90px 0 0 668px;
+    z-index: 10;
+    border-radius: 0 5px 5px 5px;
+    display: none;
+}
+.upcomming_event_participants_list_box::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    border-bottom: 10px solid rgba(66, 66, 66, 0.7);
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    top: -10px
+}
+.upcomming_event_participants_list{
+    padding: 3px 5px 0 3px;
+    max-width: 300px;
+}
+.upcomming_event_participants_list>li{
+    display: inline-block;
+    margin: 0 -2px 3px 0;
+}
+.upcomming_event_participants_list img{
+    border-radius: 50%;
+}
+.crew_qualification_condition_box{
+    width: 538px;
+    height: 158px;
+    border: 1px solid #bababa;
+    position: relative;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.crew_qualification_condition_title{
+    width: 538px;
+    height: 34px;
+    border-bottom: 1px solid #757575;
+}
+.crew_qualification_condition_title>span{
+    font-size: 19px;
+    position: absolute;
+    margin: 10px 0 5px 10px;
+}
+.condition_box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 50px 0 0 50px;
+}
+.condition_list{
+    display: block;
+    font-size: 19px;
+    width: 400px;
+}
+.condition_list>li{
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.crew_join{
+    width: 120px;
+    height: 30px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #FFAB40;
+}
+.crew_join>a{
+    display: block;
+    width: 120px;
+    height: 30px;
+    padding: 7px 0;
+    color: white;
+}
+.crew_join>a:hover{
+    text-decoration: underline;
+}
+
+#crewFunctionBar{
+    width: 260px;
+    float: right;
+    margin-left: 10px;
+}
+.chatting_box{
+    width: 258px;
+    height: 98px;
+    position: relative;
+    border: 1px solid #bababa;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.chatting_box>span{
+    display: block;
+    width: 250px;
+    font-size: 15px;
+    padding: 10px 0 5px 10px;
+    border-bottom: 1px solid #757575;
+}
+.current_chatting_box{
+    width: 260px;
+    height: 70px;
+    position: relative;
+}
+.current_chatting_box>a{
+    display: block;
+    width: 260px;
+    height: 70px;
+}
+.current_chatting_box img{
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 15px 0 0 20px;
+}
+.current_chatting:hover>.chatting_box_crew_name{
+    text-decoration: underline;
+}
+.chatting_box_crew_name{
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 13px 0 0 80px;
+}
+.current_chatting:hover>.chatting_box_crew_name{
+    text-decoration: underline;
+}
+.chatting_text{
+    position: absolute;
+    display: block;
+    width: 170px;
+    top: 0;
+    left: 0;
+    margin: 36px 0 0 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.meeting_basket{
+    width: 260px;
+    margin-top: 10px;
+}
+.meeting_wish_box{
+    width: 126px;
+    float: left;
+    margin-right: 4px;
+    border: 1px solid #bababa;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.meeting_wish_list, .meeting_apply_list{
+    text-align: center;
+}
+.meeting_wish_list>dt, .meeting_apply_list>dt{
+    border-bottom: 1px solid #757575;
+    padding: 5px 0;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.meeting_apply_box{
+    width: 126px;
+    float: left;
+    border: 1px solid #bababa;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.meeting_basket_item{
+    position: relative;
+    margin-bottom: 9px;
+}
+.meeting_basket_item>a{
+    display: block;
+}
+.meeting_basket_item img{
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 5px 0 0 44px;
+}
+.meeting_basket_item:hover .basket_item_crew_name{
+    text-decoration: underline;
+}
+.basket_item_crew_name{
+    display: block;
+    padding: 50px 0 10px 0;
+    font-weight: bold;
+}
+.basket_item_meeting_name{
+    display: -webkit-box;
+    width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+    margin-left: 4px;
+    text-align: left;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+/* 2줄 이상 줄생략은 그냥 자바에서 하자 이거 표준이 아니래 */

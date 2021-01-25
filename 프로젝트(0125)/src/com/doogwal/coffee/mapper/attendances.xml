@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	
+"-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="attendances">
+<!--박형우 start-->
+<!--20210114 start-->
+	<select id="selectYAttendance" parameterType="int" resultType="Attendance">
+		SELECT NO, ATTENDANCE, SCHEDULE_NO scheduleNo, MEMBER_NO memberNo, REGDATE	
+		FROM attendances
+		WHERE SCHEDULE_NO = #{no} and attendance='Y'
+	</select>
+	
+	<select id="selectYAttendanceCount" parameterType="int" resultType="int">
+		SELECT count(*)
+		FROM attendances
+		WHERE SCHEDULE_NO = #{no} and attendance='Y'
+	</select>
+
+	<select id="selectYAttendanceList" parameterType="int" resultType="CrewMember">
+		SELECT crew_members.NO, CREW_NO crewNo, USER_NO userNo, ROLE, REPORT_NUM reportNum, PROFILE_IMG profileImg, INTRODUCTION, TYPE, crew_members.REGDATE	
+		FROM attendances JOIN crew_members ON attendances.member_no = crew_members.no
+		WHERE attendance='Y' and schedule_no = #{no}
+	</select>
+<!--20210114 end-->
+<!--박형우  end-->
+
+
+</mapper>  

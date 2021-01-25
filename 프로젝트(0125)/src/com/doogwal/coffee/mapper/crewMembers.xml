@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	
+"-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crewMembers">
+
+<!-- 주성호 2021 01 11 header-->
+<!--20210112 1615 주성호 헤더 -->
+	<select id="selectOwnList" parameterType="int"  resultType="CrewMember">
+		SELECT m.no, c.no, user_no userNo, role, report_num reportNum, profile_img profileImg, introduction, type, m.regdate, cover_img coverImg
+		FROM crew_members m, crews c
+		WHERE m.user_no=#{no} AND m.crew_no = c.no
+		ORDER BY 9
+	</select>
+<!-- 주성호 2021 01 11 header-->
+<!--20210112 1615 주성호 헤더 -->
+	
+
+<!-- 주성호 2021 01 14 크루 만들기-->
+<!--20210114 1615 주성호 크루 만들기 start -->
+<insert id="insertCrewMemberByCaptin" parameterType="CrewMember">
+		INSERT INTO crews_members(no, CREW_NO, USER_NO, ROLE, REPORT_NUM, PROFILE_IMG, INTRODUCTION, TYPE, regdate)
+		VALUES(crew_members_seq.nextval, #{crewNo},#{userNo},#{role},#{reportNum},#{profileImg},#{introduction},#{type}, systimestamp)
+	</insert>
+<!-- 주성호 2021 01 14 크루 만들기-->
+<!--20210114 1615 주성호 크루 만들기 end -->
+
+<!--박형우 start-->
+<!--20210114 start-->
+<select id="selectWatingCrewMemberImgs" parameterType="int" resultType="String">
+		SELECT PROFILE_IMG profileImg
+		FROM crew_members
+		WHERE crew_no = #{no} AND type='W'
+		ORDER BY user_no
+	</select>
+<!--20210114 end -->
+<!--박형우  end -->
+
+
+</mapper>
