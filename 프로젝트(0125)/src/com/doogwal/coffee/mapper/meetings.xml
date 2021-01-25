@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	
+"-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meetings">
+<!-- 송진현 -->
+<select id="selectDetailOne" parameterType="int" resultType="Meeting">
+SELECT start_date startDate, end_date endDate, name, address, description, lat, lng, regdate, category_no categoryNo ,district_no districtNo, type, crew_no crewNo, regdate, point, theme_no themeNo, confirmation, img, place
+FROM schedules s, meetings m
+WHERE s.no = #{no} AND m.no = #{no}
+</select>
+<!-- end 송진현 -->
+</mapper>  

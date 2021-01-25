@@ -7,6 +7,7 @@ import com.doogwal.coffee.util.SqlSessionUtil;
 import com.doogwal.coffee.vo.Preparation;
 
 public class PreparationsDAO {
+	//송진현
 	public static int insert(Preparation preparation) {
 		int result = 0;
 		SqlSession session = null;
@@ -39,4 +40,5 @@ public class PreparationsDAO {
 		
 		return preparations;
 	}
+	//end 송진현
 }

@@ -14,7 +14,10 @@ public class CrewMember {
 	public CrewMember() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public CrewMember(int no) {
+		super();
+		this.no = no;
+	}
 	public CrewMember(int no, int crewNo, int userNo, int reportNum, char role, char type, String profileImg,
 			String introduction) {
 		this.no = no;

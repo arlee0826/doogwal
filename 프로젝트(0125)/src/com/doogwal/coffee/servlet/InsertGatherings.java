@@ -2,16 +2,24 @@ package com.doogwal.coffee.servlet;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.coyote.RequestGroupInfo;
+
+import com.doogwal.coffee.dao.AttendancesDAO;
+import com.doogwal.coffee.dao.CrewMembersDAO;
 import com.doogwal.coffee.dao.DistrictsDAO;
 import com.doogwal.coffee.dao.GatheringsDAO;
 import com.doogwal.coffee.dao.PreparationsDAO;
 import com.doogwal.coffee.dao.SchedulesDAO;
+import com.doogwal.coffee.vo.Attendance;
+import com.doogwal.coffee.vo.CrewMember;
 import com.doogwal.coffee.vo.District;
 import com.doogwal.coffee.vo.Gathering;
 import com.doogwal.coffee.vo.Preparation;
@@ -34,9 +42,10 @@ import com.doogwal.coffee.vo.Preparation;
 	 String preparation = req.getParameter("preparation"); //준비물 
 	 String location = req.getParameter("location"); //좌표
 	 String allDay = req.getParameter("allDay"); //하루종일 radio_checked(on/null)
-	 
+	 String crewStr = req.getParameter("crewNo");
 	 int fee = Integer.parseInt(feeString); //회비 int형으로 변환
-	
+	 int crewNo = Integer.parseInt(crewStr); 
+	 
 	 Timestamp startDate = Timestamp.valueOf("2020-01-01 00:00:00"); // 문자열 합치고 Timestamp타입으로 변환 0000-00-00 00:00:00
 	 Timestamp endDate = Timestamp.valueOf("2020-01-01 00:00:00");
 	
@@ -58,8 +67,6 @@ import com.doogwal.coffee.vo.Preparation;
 	 String[] addressToken = address.split(" "); //문자열 자르기
 	 District district = DistrictsDAO.selectOne(addressToken[1]); //행정구역 번호 받아옴 
 	 int districtNo = district.getNo(); //행정구역 번호
-
-	 int crewNo = 500; //임시 크루번호
 	 
 	 Gathering schedule = new Gathering(districtNo, crewNo, type, startDate, endDate, name, address, description, lat, lng); //스케줄 객체 생성
 	 SchedulesDAO.insert(schedule); //insert
@@ -76,6 +83,13 @@ import com.doogwal.coffee.vo.Preparation;
 		 PreparationsDAO.insert(preparations);
 		 idx++;
 	 }
+	 
+	 List<CrewMember> crewmembers = CrewMembersDAO.selectList(crewNo);
+	 for(CrewMember crewmember: crewmembers ) {
+		 Attendance attendance = new Attendance(schedualNo,crewmember.getNo());
+		 AttendancesDAO.insertList(attendance);
+	 }
+	 
  }
 }		
 

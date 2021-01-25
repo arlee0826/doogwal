@@ -8,6 +8,7 @@ import com.doogwal.coffee.vo.Crew;
 import com.doogwal.coffee.vo.CrewMember;
 
 
+
 public class CrewMembersDAO {
 	/*
 	2021 01 12 주성호 start
@@ -73,8 +74,25 @@ public static List<String> selectWatingCrewMemberImgs(int no) {
 //20210114 end
 //박형우 end -----------------------------------------------------------------------
 
+//송진현
+public static List<CrewMember> selectList(int no) {
 	
+	List<CrewMember> crewmembers  = null;
+	SqlSession session = null;
 	
+	try {
+		session = SqlSessionUtil.getSession();
+		crewmembers = session.selectList("crewMembers.selectList",no);
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		if(session!=null) {
+			session.close();
+		}//if end
+	}//try~catch~finally end
 	
+	return crewmembers ;
+}
+//end 송진현
 	
 }//CrewMembersDAO end

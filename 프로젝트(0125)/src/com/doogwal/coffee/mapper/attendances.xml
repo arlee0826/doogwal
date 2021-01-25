@@ -24,6 +24,22 @@
 	</select>
 <!--20210114 end-->
 <!--박형우  end-->
-
-
+<!-- 송진현 -->
+<select id="selectList" parameterType="int" resultType="Attendance">
+		SELECT attendance, a.member_no memberNo,c.profile_img profileImg
+		FROM attendances a, crew_members c
+		WHERE a.member_no=c.no AND schedule_no=#{no}
+	</select>
+	
+	<update id="update" parameterType="Attendance">
+		UPDATE attendances 
+		SET  attendance = #{attendance}
+		WHERE member_No = #{memberNo} AND schedule_No = #{scheduleNo}
+	</update>
+	
+	<insert id="insertList" parameterType="Attendance">
+    INSERT INTO attendances(NO,ATTENDANCE,SCHEDULE_NO,MEMBER_NO,REGDATE)
+    VALUES(attendances_seq.nextval,'N',#{scheduleNo},#{memberNo},systimestamp)
+</insert>
+<!-- end 송진현 -->
 </mapper>  

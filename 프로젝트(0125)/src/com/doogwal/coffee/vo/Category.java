@@ -1,29 +1,22 @@
 package com.doogwal.coffee.vo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Category {
 
 	private int no,priorNo;
-	private String name,icon;
+	private String name,icon,nameParents;
 	private Timestamp regdate;
 	
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	
-	public Category(int no, int priorNo, String name, String icon) {
+	public Category(String name, String nameParents) {
 		super();
-		this.no = no;
-		this.priorNo = priorNo;
 		this.name = name;
-		this.icon = icon;
+		this.nameParents = nameParents;
 	}
-
-
 
 	public int getNo() {
 		return no;
@@ -56,6 +49,23 @@ public class Category {
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+
+	public String getNameParents() {
+		return nameParents;
+	}
+
+	public void setNameParents(String nameParents) {
+		this.nameParents = nameParents;
+	}
+
+	public Timestamp getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = regdate;
+	}
+
 	
 	
 }

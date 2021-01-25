@@ -3,6 +3,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="preparations">
+<!-- 송진현 -->
 <insert id="insert" parameterType="Preparation">
     INSERT INTO preparations(no,schedule_no,preparation,regdate)
     VALUES(preparations_seq.nextval,#{scheduleNo},#{preparation},systimestamp)
@@ -13,4 +14,5 @@
         FROM preparations
         WHERE schedule_no=#{no}
     </select>
+    <!-- end 송진현 -->
 </mapper>

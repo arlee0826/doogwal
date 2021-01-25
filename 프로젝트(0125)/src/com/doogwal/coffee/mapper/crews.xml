@@ -151,6 +151,12 @@ WHERE c.no = m.crew_no
 AND c.no = r.no
 </select>
 <!--// 이아림 20210124 밋팅 히스토리 대결탭 크루리스트 end -->
-
+<!-- 송진현 -->
+<select id="select" parameterType="int" resultType="Crew">
+SELECT NO, NAME, COVER_IMG coverImg, INTRO, MIN_AGE minAge, MAX_AGE maxAge, MAX_POP maxPop, CUR_POP curPop, CATEGORY_NO categoryNo, REGDATE, AVG_AGE avgAge, GENDER_RATE genderRate, POINT
+FROM crews
+where no=#{no}	
+</select>
+<!-- end 송진현 -->
 
 </mapper>

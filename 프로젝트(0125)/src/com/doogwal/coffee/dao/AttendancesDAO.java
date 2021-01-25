@@ -68,5 +68,54 @@ public class AttendancesDAO {
 	//20210114 end
 	//박형우 end -----------------------------------------------------------------------
 
+		//송진현
+public static List<Attendance> selectList(int no) {
+			
+			List<Attendance> attendances = null;
+			SqlSession session = null;
+			
+			try {
+				session = SqlSessionUtil.getSession();
+				attendances = session.selectList("attendances.selectList",no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(session!=null) {
+					session.close();
+				}//if end
+			}//try~catch~finally end
+			
+			return attendances;
+		}
+		
+		public static int update(Attendance attendanceUpdate) {
+			int result = 0;
+			SqlSession session = null;
+			try {
+				session = SqlSessionUtil.getSession();
+				result = session.update("attendances.update",attendanceUpdate);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				session.close();
+			}//try~catch~finally end
+			
+			return result;
+		}//update() end
+	
+		public static int insertList(Attendance attendance) {
+			int result = 0;
+			SqlSession session = null;
+			try {
+				session = SqlSessionUtil.getSession();
+				result = session.insert("attendances.insertList",attendance);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+			return 0;
+		}
+		//end 송진현
 	
 }//AttendancesDAO end

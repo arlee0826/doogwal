@@ -170,4 +170,23 @@ public class CrewsDAO {
 			return null;
 		}//밋팅 히스토리 대결 탭 크루 리스트 20210125 이아림  end
 		
+		//송진현
+public static Crew select(int no) {
+			
+			SqlSession session = null;
+			
+			try {
+				session = SqlSessionUtil.getSession();
+				
+				return session.selectOne("crews.select", no);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				session.close();
+			}
+			
+			return null;
+		}
+//end 송진현
+		
 }//CrewsDAO end

@@ -36,6 +36,12 @@
 	</select>
 <!--20210114 end -->
 <!--박형우  end -->
-
+<!-- 송진현 -->
+<select id="selectList" parameterType="int" resultType="CrewMember">
+		select no
+		from crew_members
+		where crew_no= #{no}
+</select>
+<!-- end 송진현 -->
 
 </mapper>

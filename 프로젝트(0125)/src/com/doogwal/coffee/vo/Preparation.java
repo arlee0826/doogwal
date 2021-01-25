@@ -13,6 +13,12 @@ public class Preparation {
 		this.scheduleNo = scheduleNo;
 		this.preparation = preparation;
 	}
+	
+	public Preparation(String preparation) {
+		super();
+		this.preparation = preparation;
+	}
+
 	public Preparation() {
 	}
 	

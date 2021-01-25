@@ -18,6 +18,11 @@ public class Rule {
 	}
 
 
+	public Rule(String rule) {
+		super();
+		this.rule = rule;
+	}
+
 	public int getNo() {
 		return no;
 	}

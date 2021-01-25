@@ -62,26 +62,6 @@ public class SchedulesDAO {
 	//20210114 end
 	//박형우 end -----------------------------------------------------------------------
 
-		
-	public static Gathering selectOne(int no) {
-			
-			SqlSession session = null;
-			
-			try {
-				session = SqlSessionUtil.getSession();
-				
-				return session.selectOne("schedules.selectOne",no);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				session.close();
-			}
-			
-			return null;
-		}
-	
-	
 	//20210124 밋팅히스토리(대결,친목) 카운트 이아림
 	public static Map<String, Object> selectHistoryCount(int crewNo) {
 		
@@ -96,5 +76,26 @@ public class SchedulesDAO {
 		}
 		return null;
 	}
+	
+	//송진현
+	public static Gathering selectOne(int no) {
+		
+		SqlSession session = null;
+		
+		try {
+			session = SqlSessionUtil.getSession();
+			
+			return session.selectOne("schedules.selectOne",no);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		
+		return null;
+	}
+
+	//end 송진현
 	
 }////SchedulesDAO end

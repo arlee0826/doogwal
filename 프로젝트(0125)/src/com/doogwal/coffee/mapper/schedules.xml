@@ -3,6 +3,7 @@
 "-//mybatis.org//DTD Mapper 3.0//EN"	
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schedules">
+<!-- 송진현 -->
 <insert id="insert" parameterType="Gathering">
 	<selectKey order="BEFORE" resultType="int" keyProperty="no">
 		SELECT schedules_seq.nextval
@@ -18,7 +19,7 @@
 	FROM schedules
 	WHERE no=#{no}
 </select>
-
+<!-- end 송진현 -->
 <!-- 20210124 밋팅히스토리(대결,친목) 카운트 이아림 -->
 <select id="selectHistoryCount" parameterType="int" resultType="map" >
 SELECT(SELECT count(*)
