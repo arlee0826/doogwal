@@ -12,7 +12,7 @@
 		if(userCrews[i]==null){
 			System.out.println("NULL");
 		}else{
-			System.out.println(userCrews[i].getCoverImg());
+			System.out.println(userCrews[i].getCrewNo());
 		}
 		//System.out.println(userCrews[i].getCoverImg());
 	}
@@ -37,7 +37,7 @@
                 <ul>
                 	<%for(int i=0;i<userCrews.length;i++){ %>
                 		<%if(userCrews[i]!=null){ %>
-                    		<li><a href="/<%=userCrews[i].getNo()%>"><img class="header_crew_list_on" src="/crew/<%=userCrews[i].getCoverImg() %>" width="40" height="40" /></a></li>
+                    		<li><a href="/crewDetailPost.jsp?crewNo=<%=userCrews[i].getCrewNo() %>&memberNo=<%=userCrews[i].getNo() %>&crewOrder=<%=i%>"><img class="header_crew_list_on" src="/img/<%=userCrews[i].getCoverImg() %>" width="40" height="40" /></a></li>
                    		<%}else{ %>
                    			<li><a href="/create_crew.jsp"><i class="fas fa-plus-circle"></i></a></li>
                    		<%} %>
@@ -46,7 +46,7 @@
             </div><!--//header_crew_list -->
             <div class="header_meeting_home"><a href="/"><i class="far fa-handshake"></i></a></div>
             <div class="header_status">
-            <%if(loginUser==null){ %>
+            <%if(loginUser==null || userCrews[0] == null){ %>
             <a href="/">
             <i class="fas fa-user-circle"></i></a>
             <%}else{ %>
@@ -59,12 +59,10 @@
                 <ul>
             <%if(loginUser==null){ %>
             		<li><a href="/loginForm.jsp">로그인하기</a></li>
-            		<li><a href="/signUp.jsp">회원가입</a></li>
-            		
             <%}else{ %>
             		<li><a href="/myPage.jsp">마이페이지</a></li>
                  	<li><a href="/logout.do">로그아웃</a></li>
-            <%} %>
+            <%}%>
             	</ul>
             </div>
             
@@ -72,6 +70,7 @@
     </div><!--// inner end-->
 </div><!--//header end-->
 <script>
+
 const $headerStatus = $('.header_status');
 const $headerStatusDropbox = $('.header_status_dropbox');
 /*header Status Dropbox start*/

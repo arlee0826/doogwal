@@ -60,7 +60,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/doogwal/coffee/mapper/applycrews.xml" />
 		<mapper resource="com/doogwal/coffee/mapper/crewhistorys.xml" />
 		<mapper resource="com/doogwal/coffee/mapper/crewMembers.xml" />
-			<mapper resource="com/doogwal/coffee/mapper/records.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/records.xml" />
 		<mapper resource="com/doogwal/coffee/mapper/fellowships.xml" />
 </mappers>
 </configuration>

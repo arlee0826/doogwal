@@ -4,7 +4,6 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.doogwal.coffee.util.SqlSessionUtil;
-import com.doogwal.coffee.vo.Crew;
 import com.doogwal.coffee.vo.CrewMember;
 
 

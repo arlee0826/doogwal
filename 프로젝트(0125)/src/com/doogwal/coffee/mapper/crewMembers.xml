@@ -8,11 +8,12 @@
 <!-- 주성호 2021 01 11 header-->
 <!--20210112 1615 주성호 헤더 -->
 	<select id="selectOwnList" parameterType="int"  resultType="CrewMember">
-		SELECT m.no, c.no, user_no userNo, role, report_num reportNum, profile_img profileImg, introduction, type, m.regdate, cover_img coverImg
+		SELECT m.no, crew_no crewNo, user_no userNo, role, report_num reportNum, profile_img profileImg, introduction, type, m.regdate,cover_img coverImg, name
 		FROM crew_members m, crews c
 		WHERE m.user_no=#{no} AND m.crew_no = c.no
 		ORDER BY 9
 	</select>
+
 <!-- 주성호 2021 01 11 header-->
 <!--20210112 1615 주성호 헤더 -->
 	

@@ -53,32 +53,30 @@
 <%
 int falg = 0;
 int myCrew = 0;
+int myCrewM = 0;
                 		
 for(CrewMember cm : userCrews){
     if(cm==null){;}
     else{
-    System.out.println(myCrew);
-    if(cm.getRole()!='M'){falg=1;}//falg가 1이면 운영진
-   
-    if((cm.getCrewNo()==meetings.getCrewNo())&&(cm.getRole()!='M')){myCrew++;}//자기가 속한 크루이면서 임원진일 때
-
-}
-    
-}
+    	if(cm.getRole()!='M'){falg=1;}//falg가 1이면 운영진
+    	if((cm.getCrewNo()==meetings.getCrewNo())&&(cm.getRole()!='M')){myCrew++;}//자기가 속한 크루이면서 임원진일 때
+    	if((cm.getCrewNo()==meetings.getCrewNo())&&(cm.getRole()=='M')){myCrewM++;}//자기가 속한 크루이면서 회원일 때
+	}//else end  
+}//for end
 
 List<ApplyCrew> applycrews = ApplyCrewsDAO.selectList(no);
 
 int applycrewcount = 0;
 int applycrewmycrewcount = 0;
+
 for(ApplyCrew applycrew : applycrews ){
 	if(applycrew.getClass()==null){;}
 	else {
 		for(CrewMember cm : userCrews){
 			 if(cm==null){;}
-			 else if(cm.getCrewNo()==applycrew.getApplyCrewNo()){applycrewmycrewcount++;}
+			 else if(cm.getCrewNo()==applycrew.getApplyCrewNo()){applycrewmycrewcount++;}		
 		}
-		applycrewcount++;}
-	
+		applycrewcount++;}	
 }
 %>
     <div id="content"> <!-- content -->
@@ -113,24 +111,33 @@ for(ApplyCrew applycrew : applycrews ){
                     <div><%=crew.getName() %></div>
                     
                     <%if(applycrewcount<3){ %>
-                    <%if(falg==1&&myCrew!=1){ %>
-                    <div class="btn_apply"><%=point %></div>
-                    <div>수락까지 남은 시간 <span class="remain_time"></span></div>
-                    <%} %>
-                    <%if(falg==1&&myCrew==1){ %>
-
-                    <%} %>
-                    <%if(falg!=1&&myCrew!=1){ %>
-                    <%if(applycrewmycrewcount==0){ %>
-                    <div class="application_deadline">운영진만 신청 가능</div>
-                    <%} %>
-                    <%if(applycrewmycrewcount==1){ %>
-                    <div class="application_deadline">신청 완료</div>
-                    <%} %>
-                    <%} %>
-                    <%} %>
                     
-                    <%if(applycrewcount>=3){  %>
+	                    <%if(falg==1&&myCrew!=1){ %><!-- 운영진이지만 나의 크루가 아닐때 -->               
+		                    <%if(applycrewmycrewcount==0){ %><!-- 자기 크루가 신청하지 않았을 때 -->
+		                    <div class="btn_apply"><%=point %></div>
+		                    <div>수락까지 남은 시간 <span class="remain_time"></span></div>
+		                    <%} %>	
+		                    <%if(applycrewmycrewcount==1){ %><!-- 자기가 속한 크루가 이미 신청을 했을 경우 -->
+		                    <div class="application_deadline">신청 완료</div>
+		                    <%} %>		
+	                    <%} %><!-- end 운영진이지만 나의 크루가 아닐때 -->
+	                    	                   
+	                    <%if(falg==0&&myCrewM==0){ %> <!-- 회원이며 나의 크루가 아닐 때 -->
+	                    <%if(applycrewmycrewcount==0){ %><!-- 자기가 속한 크루가 만든 밋팅이 아닐 경우 -->
+	                    <div class="application_deadline">운영진만 신청 가능</div>
+	                    <%} %>
+	                    
+	                    <%if(applycrewmycrewcount==1){ %><!-- 자기가 속한 크루가 이미 신청을 했을 경우 -->
+	                    <div class="application_deadline">신청 완료</div>
+	                    <%} %>
+	                    <%} %><!-- end 회원이며 나의 크루가 아닐 때 -->
+	                    
+	                    <%if(myCrewM==1||myCrew==1){ %><!-- 자기가 속한 크루가 이미 신청을 했을 경우 -->
+	                    <div class="application_deadline">신청 받는 중....</div>
+	                    <%} %>
+	                <%} %><!-- if제일 큰 부모 -->
+                    
+                    <%if(applycrewcount>=3){  %> <!-- 3개 이상의 크루가 신청 시  -->
                       <%if(applycrewmycrewcount==0){ %>
                     <div class="application_deadline">신청 마감</div>
                     <%} %>
