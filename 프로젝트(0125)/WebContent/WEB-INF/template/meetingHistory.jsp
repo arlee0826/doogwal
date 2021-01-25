@@ -177,8 +177,6 @@
 <script src="js/jquery.js"></script>
 <script src="js/underscore-min.js"></script>
 <script src="js/tui-chart-all.min.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9461990ea008279ad054cf44109aa103&libraries=services"></script>
 
 <script type="text/template" id="historyTmpl">
     <div id="meetingHistoryPopWrap"><!--meetingHistoryPopWrap start -->
@@ -391,9 +389,6 @@
         }
     })
 
-    $(".times").click(function () {
-        $("#popWrap").css("display","none");
-    })
 
     $(".meeting_request_confirm_btn").click(function () {
         let val = $('.content_input_field').val();
@@ -450,6 +445,7 @@ $battleViewMoreBtn.click(function(e) {
 });
 
 
+
     //팝업 닫기버튼
     $closeBtn.click(function () {
     	
@@ -458,65 +454,6 @@ $battleViewMoreBtn.click(function(e) {
 
     });//click() end
 
-    
-    
-    //--------------------------------------------------------------------------------주소 찾기 . 지도 보이기
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.0013545214342, 127.648247356919), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.0013545214342, 127.648247356919),
-        map: map
-    });
-
-
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = data.address; // 최종 주소 변수
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("sample5_address").value = addr;
-                //---------------------------------------------------------------------주소 우회
-                document.getElementById("addressContent").innerHTML = addr;
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
-    }
-
-    // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomIn() {
-        map.setLevel(map.getLevel() - 1);
-    }
-
-    // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-    function zoomOut() {
-        map.setLevel(map.getLevel() + 1);
-    }
-    //end 주소 찾기 . 지도 보이기
 
     //시간 차이 보여줌 1초마다 차이가 줄어듦
     //let meetingDue = 미팅시간-3일
@@ -780,4 +717,6 @@ $battleViewMoreBtn.click(function(e) {
         $('.word_counter').text(val.length + "자/최대30자");
 
     });//on() end
+    
+
 </script>

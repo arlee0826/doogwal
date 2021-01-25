@@ -9,7 +9,7 @@
 <![CDATA[
 	select r1.type type, c.name crewName, c.cover_img coverImg, s.name meetingName, s.start_date startDate
 	from records r1, records r2, crews c, schedules s
-	where r1.crew_no = #{no} AND r1.meeting_no = r2.meeting_no AND r2.crew_no != #{no} AND  r2.crew_no=c.no(+) AND r1.meeting_no = s.no(+) AND rownum < 4
+	where r1.crew_no = #{no} AND r1.meeting_no = r2.meeting_no AND r2.crew_no != #{no} AND  r2.crew_no=c.no(+) AND r1.meeting_no = s.no(+)
 	order by s.start_date desc
 	]]>
 	
