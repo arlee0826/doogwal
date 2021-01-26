@@ -35,50 +35,7 @@
 	
 	
 %>
-<div id="meetingRequestPop">
-<div id="popWrap">
-    <div id="popContainer"><!--popContainer-->
-        <form>
-            <div class="times"><i class="fas fa-times"></i></div>
-            <div class="guide"><p>상대 크루에게 한 마디 해주세요</p></div>
-            <textarea maxlength="30" cols="30" class="content_input_field" placeholder="내용을 꼭 입력해주세요.(최대30자)"></textarea>
-            <div class="counting_characters">(0/30)자</div>
-            <ul>
-                <li>
-                    <label class="box-radio-input" for="cp_item1">
-                    <input type="radio" name="cp_item" id="cp_item1">
-                    <div class="crew_box">
-                        <div class="icon_check"><i class="fas fa-check"></i></div>
-                        <img src="img/category1.jpg">
-                        <p>용산 축구</p>
-                    </div>
-                </label></li>
-                <li>
-                    <label class="box-radio-input" for="cp_item2">
-                        <input type="radio" name="cp_item" id="cp_item2">
-                        <div class="crew_box">
-                            <div class="icon_check"><i class="fas fa-check"></i></div>
-                            <img src="img/category2.jpg">
-                            <p>널 사랑해서 행복해</p>
-                        </div>
-                    </label>
-                </li>
-                <li>
-                    <label class="box-radio-input" for="cp_item3">
-                        <input type="radio" name="cp_item" id="cp_item3">
-                        <div class="crew_box">
-                            <div class="icon_check"><i class="fas fa-check"></i></div>
-                            <img src="img/category3.jpg">
-                            <p>보기만 해도 행복해</p>
-                        </div>
-                    </label>
-                </li>
-            </ul>
-            <button class="meeting_request_confirm_btn" type="button">확인</button>
-        </form>
-    </div><!--//popContainer-->
-</div>
-</div><!--//meetingRequestPop end -->
+
 
 <!--/////////////////////////////////////////////////////////  -->
 
@@ -386,23 +343,6 @@
         }
         else{
             $(".meeting_request_confirm_btn").css("background-color","#424242");
-        }
-    })
-
-
-    $(".meeting_request_confirm_btn").click(function () {
-        let val = $('.content_input_field').val();
-        if(val.length<1){
-            $(".content_input_field").css("border-color","rgb(255, 91, 51)")
-            $('.counting_characters').text("입력해주세요!!").css("color","rgb(255, 91, 51)");
-        }
-
-        if($("input:radio[name=cp_item]:checked").length<1){
-            alert("신청할 크루를 선택하세요");
-        }
-
-        if ((val.length>1)&&($("input:radio[name=cp_item]:checked").length==1)){
-            $(".meeting_request_confirm_btn").attr("type","submit");
         }
     })
 /*밋팅 신청하기 자바스크립트 끝*/

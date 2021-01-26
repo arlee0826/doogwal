@@ -89,7 +89,10 @@
         }
         .meeting_request_confirm_btn{/*확인버튼*/
             display: block;
-            margin: 0 auto;
+            margin-top: 220px;
+   	 		position: absolute;
+    		left: 50%;
+    		margin-left: -40px;
             width: 80px;
             height: 40px;
             color: white;
