@@ -244,7 +244,7 @@ for(ApplyCrew applycrew : applycrews ){
         <form>
             <div class="times"><i class="fas fa-times"></i></div>
             <div class="guide"><p>상대 크루에게 한 마디 해주세요</p></div>
-            <textarea maxlength="30" cols="30" class="content_input_field" placeholder="내용을 꼭 입력해주세요.(최대30자)"></textarea>
+            <textarea maxlength="30" cols="30" id="contentInputField" class="content_input_field" placeholder="내용을 꼭 입력해주세요.(최대30자)"></textarea>
             <div class="counting_characters">(0/30)자</div>
             <ul>
             <%        		
@@ -256,7 +256,7 @@ for(ApplyCrew applycrew : applycrews ){
 			%>
                 <li>
                     <label class="box-radio-input" for="cp_item1">
-                    <input type="radio" name="cp_item" id="cp_item1">
+                    <input type="radio" name="cp_item" id="cp_item1" value="<%=toapplycrew.getNo() %>">
                     <div class="crew_box">
                         <div class="icon_check"><i class="fas fa-check"></i></div>
                         <img src="img/<%=toapplycrew.getCoverImg() %>">
@@ -412,11 +412,26 @@ $(".times").click(function () {
         if($("input:radio[name=cp_item]:checked").length<1){
             alert("신청할 크루를 선택하세요");
         }
+        
+        var crewNo = $(":input:radio[name=cp_item]:checked").val();
+        var introduce = $("textarea#contentInputField").val();
 
         if ((val.length>1)&&($("input:radio[name=cp_item]:checked").length==1)){//ajax 추가 
             alert("성공");
+            $.ajax({
+            	url:"/ajax/toApplyCrew.json",
+            	type : 'GET',
+            	data : {introduce:introduce,crewNo:crewNo,meetingNo:<%=no%>},
+            	error : function(xhr, error, code) {
+            	alert("에러:" + code);
+            	},
+            	success:function(json) {
+            	console.log(json);
+            	$applyCrewList.html(applyCrewsTmpl({crew : json}));
+            	}
+            	});
         }
-    })
+    });
 
 </script>
 </body>
