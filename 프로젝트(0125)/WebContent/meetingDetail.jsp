@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/tui-chart.min.css"/>
     <link rel="stylesheet" href="css/meetinghistory.css"/>
       <%
-    int no =3003;
+    int no =502;
     Meeting meetings = MeetingsDAO.selectDetailOne(no); //
     
     char type = meetings.getType();
@@ -68,13 +68,15 @@ List<ApplyCrew> applycrews = ApplyCrewsDAO.selectList(no);
 
 int applycrewcount = 0;
 int applycrewmycrewcount = 0;
+int applymycrew=0;
 
 for(ApplyCrew applycrew : applycrews ){
 	if(applycrew.getClass()==null){;}
 	else {
 		for(CrewMember cm : userCrews){
 			 if(cm==null){;}
-			 else if(cm.getCrewNo()==applycrew.getApplyCrewNo()){applycrewmycrewcount=1;}		
+			 else if(cm.getCrewNo()==applycrew.getApplyCrewNo()){applycrewmycrewcount=1;}//자기가 속한 크루가 신청하였을 때
+			 if(applycrew.getAcceptance()=='A'){applymycrew=1;}//승락한 크루가 있을 경우
 		}
 		applycrewcount++;}	
 }
@@ -115,7 +117,7 @@ for(ApplyCrew applycrew : applycrews ){
 	                    <%if(falg==1&&myCrew==0){ %><!-- 운영진이지만 나의 크루가 아닐때 -->               
 		                    <%if(applycrewmycrewcount==0){ %><!-- 자기 크루가 신청하지 않았을 때 -->
 		                    <div class="btn_apply"><%=point %></div>
-		                    <div>수락까지 남은 시간 <span class="remain_time"></span></div>
+		                    <div class="time_remaining">수락까지 남은 시간 <span class="remain_time"></span></div>
 		                    <%} %>	
 		                    <%if(applycrewmycrewcount==1){ %><!-- 자기가 속한 크루가 이미 신청을 했을 경우 -->
 		                    <div class="application_deadline">신청 완료</div>
@@ -132,19 +134,29 @@ for(ApplyCrew applycrew : applycrews ){
 	                    <%} %>
 	                    <%} %><!-- end 회원이며 나의 크루가 아닐 때 -->
 	                    
-	                    <%if(myCrewM==1||myCrew==1){ %><!-- 자기가 속한 크루일 때 -->
+	                    <%if((myCrewM==1||myCrew==1)&&(applymycrew==0)){ %><!-- 자기가 속한 크루일 때 -->
 	                    <div class="application_deadline">신청 받는 중....</div>
+	                    <%} %>
+	                     <%if((myCrewM==1||myCrew==1)&&(applymycrew==1)){ %><!-- 자기가 속한 크루일 때 -->
+	                    <div class="application_deadline">밋팅 성사</div>
 	                    <%} %>
 	                   
 	                <%} %><!-- if제일 큰 부모 -->
                     
-                    <%if(applycrewcount>=3){ System.out.println("너"+applycrewmycrewcount);%> <!-- 3개 이상의 크루가 신청 시  -->
-                    	 <%if(applycrewmycrewcount==0){ %>
-                   		 <div class="application_deadline">신청 마감</div>
+                    <%if(applycrewcount>=3){ %> <!-- 3개 이상의 크루가 신청 시  -->
+                    	 <%if(applycrewmycrewcount==0&&(applymycrew==0)){ %>
+                   		 <div class="application_deadline">밋팅 성사 대기중....</div>
                    		 <%} %>
-                   		 <%if(applycrewmycrewcount==1){ %>
-                   		 <div class="application_deadline">신청 완료</div>
-                   		 <%} %>                    
+                   		  <%if(applycrewmycrewcount==1&&(applymycrew==0)){ %>
+                   		 <div class="application_deadline">밋팅 성사 대기중....</div>
+                   		 <%} %>
+                   		 <%if(applycrewmycrewcount==1&&(applymycrew==1)){ %>
+                   		 <div class="application_deadline">밋팅 성사</div>
+                   		 <%} %>  
+                   		  <%if(applycrewmycrewcount==0&&(applymycrew==1)){ %>
+                   		 <div class="application_deadline">밋팅 성사</div>
+                   		 <%} %>  
+                   		                   
                     <%} %> <!--end 3개 이상의 크루가 신청 시  -->
                 </div><!--//description_contents_child3-->
             </div><!--//description_contents-->
@@ -180,7 +192,7 @@ for(ApplyCrew applycrew : applycrews ){
             <ul id="applyCrewList">
             </ul>
         	<%	
-        	if(myCrew==1){       		
+        	if(myCrew==1&&applymycrew==0){ //나의 크루이면서 임원일 때
        		 %>
             <div class="choosing_btn">고르기</div>
             <%} %>
@@ -274,7 +286,7 @@ for(ApplyCrew applycrew : applycrews ){
 </div><!--//meetingRequestPop end -->
 <%@ include file="/WEB-INF/template/footer.jsp" %>
 <script type="text/template" id="applyCrewTmpl">
-    <@ _.each(crew,function(c){
+<@ _.each(crew,function(c){
 if(c.type==null) c.type = "";
 let type = c.type;
 let typeArray = type.split(',');
@@ -282,6 +294,7 @@ let idx = 0;
 let win = 0;
 let lose = 0;
 let draw = 0;
+let acc = 0;
 while(idx<typeArray.length)
 {
 	if(typeArray[idx]=='W') {win++; idx++;}
@@ -292,7 +305,7 @@ while(idx<typeArray.length)
 let total = win+"승 "+draw+"무 "+lose+"패";
 @>
     <li>
-        <input type="radio" id="<@=c.applyCrewNo@>" name="check_crew">
+        <input type="radio" id="<@=c.applyCrewNo@>" value="<@=c.applyCrewNo@>" name="check_crew" <@if(c.acceptance=='A'){@> checked <@}@> <@if(acc==1){@> disabled <@}@> >
         <label for="<@=c.applyCrewNo@>">
             <div>
                 <img src="img/<@=c.coverImg@>">
@@ -418,21 +431,70 @@ $(".times").click(function () {
 
         if ((val.length>1)&&($("input:radio[name=cp_item]:checked").length==1)){//ajax 추가 
             alert("성공");
-            $.ajax({
+            
+        $.ajax({
             	url:"/ajax/toApplyCrew.json",
             	type : 'GET',
             	data : {introduce:introduce,crewNo:crewNo,meetingNo:<%=no%>},
             	error : function(xhr, error, code) {
             	alert("에러:" + code);
             	},
-            	success:function(json) {
-            	console.log(json);
-            	$applyCrewList.html(applyCrewsTmpl({crew : json}));
-            	}
-            	});
-        }
+            	success:function() {
+            			$.ajax({
+            			url:"/ajax/applyCrewList.json",
+            			type : 'GET',
+            			data : {no:<%=no%>},
+            			error : function(xhr, error, code) {
+            			alert("에러:" + code);
+            			},
+            			success:function(json) {
+            			console.log(json);
+            			$applyCrewList.html(applyCrewsTmpl({crew : json}));
+            			}
+            			});
+            			
+            			$("#meetingRequestPop").removeClass("appear");
+            		    $html.removeClass("on");
+						
+            		    $(".btn_apply").hide();
+            		    $(".time_remaining").hide();
+            		    
+            		    const $apply = $("<div class='application_deadline'>신청 완료<div>");
+            		  	$apply.appendTo(".description_contents_apply");
+            	}//success
+            	});//ajax
+        }//if문
     });
 
+    
+    $(".choosing_btn").click(function() {
+    	    var radioVal = $('input[name="check_crew"]:checked').val();
+    	    $.ajax({
+           	url:"/ajax/meetingApplicationUpdate",
+           	type : 'GET',
+           	data : {crewNo:radioVal,meetingNo:<%=no%>},
+           	error : function(xhr, error, code) {
+           	alert("에러:" + code);
+           	},
+           	success:function() {
+           			$.ajax({
+           			url:"/ajax/applyCrewList.json",
+           			type : 'GET',
+           			data : {no:<%=no%>},
+           			error : function(xhr, error, code) {
+           			alert("에러:" + code);
+           			},
+           			success:function(json) {
+           			console.log(json);
+           			$applyCrewList.html(applyCrewsTmpl({crew : json}));
+           			}
+           			});
+           			
+           			$(".choosing_btn").hide();
+           			$(".application_deadline").text("신청 성사");
+           	}//success
+           	});//ajax
+	})
 </script>
 </body>
 </html>

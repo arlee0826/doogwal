@@ -27,6 +27,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="MatchRecord" type="com.doogwal.coffee.vo.MatchRecord"/>
 		<typeAlias alias="MatchCrew" type="com.doogwal.coffee.vo.MatchCrew"/>
 		<typeAlias alias="FellowshipCrew" type="com.doogwal.coffee.vo.FellowshipCrew"/>
+		<typeAlias alias="MeetApp" type="com.doogwal.coffee.vo.MeetApp"/>
 </typeAliases>
 <!--  데이터 베이스와 연결 환경 설정 -->
 <environments default="development">
@@ -62,5 +63,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<mapper resource="com/doogwal/coffee/mapper/crewMembers.xml" />
 		<mapper resource="com/doogwal/coffee/mapper/records.xml" />
 		<mapper resource="com/doogwal/coffee/mapper/fellowships.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/meetApps.xml" />
 </mappers>
 </configuration>

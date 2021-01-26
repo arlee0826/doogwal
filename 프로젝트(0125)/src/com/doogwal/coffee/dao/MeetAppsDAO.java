@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.doogwal.coffee.util.SqlSessionUtil;
+import com.doogwal.coffee.vo.Gathering;
+import com.doogwal.coffee.vo.MeetApp;
 import com.doogwal.coffee.vo.Meeting;
 
 public class MeetAppsDAO {
@@ -31,5 +33,32 @@ public class MeetAppsDAO {
 		//20210114 end
 		//박형우 end ----------------------------------------------------------------------- 
 	
+			public static int insert(MeetApp meetapp) {
+				int result = 0;
+				SqlSession session = null;
+				try {
+					session = SqlSessionUtil.getSession();
+					result = session.insert("meetApps.insert",meetapp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					session.close();
+				}
+				return 0;
+			}
+			
+			public static int update(MeetApp meetapp) {
+				int result = 0;
+				SqlSession session = null;
+				try {
+					session = SqlSessionUtil.getSession();
+					result = session.update("meetApps.update",meetapp);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					session.close();
+				}
+				return 0;
+			}
 		
 }//MeetAppsDAO end

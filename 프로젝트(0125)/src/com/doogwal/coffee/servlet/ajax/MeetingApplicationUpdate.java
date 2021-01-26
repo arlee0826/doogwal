@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.doogwal.coffee.dao.MeetAppsDAO;
 import com.doogwal.coffee.vo.MeetApp;
 
-@WebServlet(value="/ajax/toApplyCrew")
-public class ToApplyCrew extends HttpServlet{
+@WebServlet(value="/ajax/meetingApplicationUpdate")
+public class MeetingApplicationUpdate extends HttpServlet{
 
 	
 	private static final long serialVersionUID = 1L;
@@ -22,17 +22,14 @@ public class ToApplyCrew extends HttpServlet{
 	
 		req.setCharacterEncoding("utf-8");  
 
-		//introduce:introduce,crewNo:crewNo,meetingNo:<%=no%>
-		String introduce = req.getParameter("introduce");
-	
 		String crewNoStr = req.getParameter("crewNo");
 		int crewNo = Integer.valueOf(crewNoStr);
 		String meetingNoStr = req.getParameter("meetingNo");
 		int meetingNo = Integer.valueOf(meetingNoStr);
 		
-		MeetApp meetapp = new MeetApp(meetingNo,crewNo,introduce);
-		MeetAppsDAO.insert(meetapp);
-		System.out.print("밋팅 신청 성공");
+		MeetApp meetapp = new MeetApp(meetingNo,crewNo);
+		MeetAppsDAO.update(meetapp);
+		System.out.print("밋팅 업데이트 성공");
 	}	
 }
 

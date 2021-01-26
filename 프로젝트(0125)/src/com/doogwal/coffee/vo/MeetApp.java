@@ -21,6 +21,19 @@ public class MeetApp {
 		this.introduce = introduce;
 	}
 
+	public MeetApp(int meetingNo, int applyCrewNo, String introduce) {
+		super();
+		this.meetingNo = meetingNo;
+		this.applyCrewNo = applyCrewNo;
+		this.introduce = introduce;
+	}
+
+	public MeetApp(int meetingNo, int applyCrewNo) {
+		super();
+		this.meetingNo = meetingNo;
+		this.applyCrewNo = applyCrewNo;
+	}
+
 	public int getNo() {
 		return no;
 	}

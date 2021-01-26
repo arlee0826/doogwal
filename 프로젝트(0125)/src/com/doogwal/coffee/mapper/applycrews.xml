@@ -9,6 +9,7 @@
 	from meet_apps m, crews c, records r
 	where m.meeting_no =#{no} AND m.apply_crew_no =c.no(+) AND c.no = r.crew_no(+)
 	GROUP BY m.apply_crew_no,m.apply_crew_no,m.introduce,m.acceptance, c.name, c.cover_img
+	order by 3 
 </select>
     
 </mapper>
