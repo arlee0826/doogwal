@@ -395,41 +395,6 @@ $battleViewMoreBtn.click(function(e) {
     });//click() end
 
 
-    //시간 차이 보여줌 1초마다 차이가 줄어듦
-    //let meetingDue = 미팅시간-3일
-    let tomorrow = moment('2021/1/6');
-    function displaytime(){
-        //  Date객체 생성
-        let now = moment();
-
-        //  역사 1900년대 사람들은 2000년대를 고려하지 않고 getYear라는 함수를 만들었었음
-        let tmp = moment.duration(tomorrow.diff(now)).asMinutes();
-
-        //시분초 차이 구하기
-        let seconds = moment.duration(tomorrow.diff(now)).seconds();
-        let minute = moment.duration(tomorrow.diff(now)).minutes();
-        let hour = moment.duration(tomorrow.diff(now)).hours();
-
-        let fullTime;
-        //00:00:00으로 보이게 하기
-        if(minute<10 && seconds<10){
-            fullTime =  hour+":0" + minute+":0" + seconds;
-        }else if(minute<10){
-            fullTime =  hour+":0" + minute+":" + seconds;
-        }else if(seconds<10){
-            fullTime =  hour+":" + minute+":0" + seconds;
-        }else{
-            fullTime =  hour+":" + minute+":" + seconds;
-        }
-
-        // text 표시
-        $(".remain_time").text(fullTime);
-
-    }//displayTime() end
-    setInterval(function (){
-        displaytime();
-    },1000); // 신청까지 남은시간 end
-
 
 
     //밋팅 history chart 시작

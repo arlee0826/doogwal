@@ -22,7 +22,6 @@ public class ToApplyCrew extends HttpServlet{
 	
 		req.setCharacterEncoding("utf-8");  
 
-		//introduce:introduce,crewNo:crewNo,meetingNo:<%=no%>
 		String introduce = req.getParameter("introduce");
 	
 		String crewNoStr = req.getParameter("crewNo");

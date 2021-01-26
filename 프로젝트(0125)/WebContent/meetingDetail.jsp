@@ -26,18 +26,19 @@
       <%
     int no =502;
     Meeting meetings = MeetingsDAO.selectDetailOne(no); //
-    
+   
     char type = meetings.getType();
     String typeStr;
     if(type=='F') typeStr = "대결";
     else typeStr = "친목";
     
+    System.out.println(meetings.getRegDate());
     Category category = CategoriesDAO.selectOne(meetings.getCategoryNo());
     Theme theme = ThemesDAO.selectOne(meetings.getThemeNo());
     List<Preparation> preparations = PreparationsDAO.selectList(no);
     List<Rule> rules = RulesDAO.selectList(no);
     Crew crew = CrewsDAO.select(meetings.getCrewNo());
-  
+    
     String point;
     if(meetings.getType()=='F') 
     	point = "-"+meetings.getPoint()+"P 신청하기";
@@ -117,7 +118,7 @@ for(ApplyCrew applycrew : applycrews ){
 	                    <%if(falg==1&&myCrew==0){ %><!-- 운영진이지만 나의 크루가 아닐때 -->               
 		                    <%if(applycrewmycrewcount==0){ %><!-- 자기 크루가 신청하지 않았을 때 -->
 		                    <div class="btn_apply"><%=point %></div>
-		                    <div class="time_remaining">수락까지 남은 시간 <span class="remain_time"></span></div>
+		                    <div class="time_remaining">수락까지 남은 시간 <br><span class="remain_time"></span></div>
 		                    <%} %>	
 		                    <%if(applycrewmycrewcount==1){ %><!-- 자기가 속한 크루가 이미 신청을 했을 경우 -->
 		                    <div class="application_deadline">신청 완료</div>
@@ -286,6 +287,10 @@ for(ApplyCrew applycrew : applycrews ){
 </div><!--//meetingRequestPop end -->
 <%@ include file="/WEB-INF/template/footer.jsp" %>
 <script type="text/template" id="applyCrewTmpl">
+<@ let acc = 0;
+_.each(crew,function(c){
+if(c.acceptance=='A'){acc=1;}
+})@>
 <@ _.each(crew,function(c){
 if(c.type==null) c.type = "";
 let type = c.type;
@@ -294,7 +299,6 @@ let idx = 0;
 let win = 0;
 let lose = 0;
 let draw = 0;
-let acc = 0;
 while(idx<typeArray.length)
 {
 	if(typeArray[idx]=='W') {win++; idx++;}
@@ -430,10 +434,10 @@ $(".times").click(function () {
         var introduce = $("textarea#contentInputField").val();
 
         if ((val.length>1)&&($("input:radio[name=cp_item]:checked").length==1)){//ajax 추가 
-            alert("성공");
+          
             
         $.ajax({
-            	url:"/ajax/toApplyCrew.json",
+            	url:"/ajax/toApplyCrew",
             	type : 'GET',
             	data : {introduce:introduce,crewNo:crewNo,meetingNo:<%=no%>},
             	error : function(xhr, error, code) {
@@ -491,10 +495,42 @@ $(".times").click(function () {
            			});
            			
            			$(".choosing_btn").hide();
-           			$(".application_deadline").text("신청 성사");
+           			$(".application_deadline").text("밋팅 성사");
            	}//success
            	});//ajax
 	})
+	    //시간 차이 보여줌 1초마다 차이가 줄어듦
+    //let meetingDue = 미팅시간-3일
+	let tid;
+    var stDate = new Date().getTime();
+	var edDate = new Date('<%=meetings.getRegDate()%>').getTime(); // 종료날짜
+	var RemainDate = edDate - stDate;
+	   setInterval(function (){
+	        tid=displaytime();
+	    },1000); // 신청까지 남은시간 end
+    function displaytime(){
+    	  var day = Math.floor(RemainDate/(1000*60*60*24));
+    	  var hours = Math.floor((RemainDate % (1000 * 60 * 60 * 24)) / (1000*60*60));
+    	  var miniutes = Math.floor((RemainDate % (1000 * 60 * 60)) / (1000*60));
+    	  var seconds = Math.floor((RemainDate % (1000 * 60)) / 1000);
+    	  
+    	  m = day+"일 "+hours + "시간 " +  miniutes + "분 " + seconds +"초"; // 남은 시간 text형태로 변경
+    	  
+    	  if (RemainDate < 0) {      
+    	    // 시간이 종료 되었으면..
+    	    clearInterval(tid);   // 타이머 해제
+    	    m = "마감"
+    	  }else{
+    	    RemainDate = RemainDate - 1000; // 남은시간 -1초
+    	  }
+        // text 표시
+        $(".remain_time").text(m);
+
+    }//displayTime() end
+ 
+
+
+	
 </script>
 </body>
 </html>
