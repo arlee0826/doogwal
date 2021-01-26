@@ -1,0 +1,26 @@
+[
+  {"crew_img":"knitting.jpg","crew_name": "취쉐어",
+    "crew_introduction": "2030 취미를 공유하는 동호회입니다"
+  },
+  {"crew_img":"soccer1.jpg","crew_name": "축구왕 슛돌이",
+    "crew_introduction": "편안한 사람들을 추구해요"
+  },
+  {"crew_img":"soccer3.jpg","crew_name": "두괄",
+    "crew_introduction": "똑바로 말하세요"
+  },
+  {"crew_img":"gallery-2932005_1920.jpg","crew_name": "갤러리아",
+    "crew_introduction": "미술 목적 동호회"
+  },
+  {"crew_img":"category1.jpg","crew_name": "산오름",
+    "crew_introduction": "친목위주의 산악 동호회"
+  },
+  {"crew_img":"category1.jpg","crew_name": "축구의 신",
+    "crew_introduction": "편안한 사람들을 추구해요"
+  },
+  {"crew_img":"puppy_meeting1.jpg","crew_name": "자식보다 귀엽다",
+    "crew_introduction": "방에만 있는 아들보다 강아지"
+  },
+  {"crew_img":"category1.jpg","crew_name": "아재FC",
+    "crew_introduction": "끝나고 쏘주 한잔!"
+  }
+]

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 클린턴 비긴이 만듦  -->
+<configuration>
+<!-- jsp에서 null을  -->
+<settings>
+<setting name="jdbcTypeForNull" value="NULL" />
+</settings>
+
+<!-- alias -->
+<typeAliases>
+		<typeAlias alias="User" type="com.doogwal.coffee.vo.User"/>
+		<typeAlias alias="Gathering" type="com.doogwal.coffee.vo.Gathering"/>
+		<typeAlias alias="District" type="com.doogwal.coffee.vo.District"/>
+		<typeAlias alias="Crew" type="com.doogwal.coffee.vo.Crew"/>
+		<typeAlias alias="Preparation" type="com.doogwal.coffee.vo.Preparation"/>
+		<typeAlias alias="MatchRecord" type="com.doogwal.coffee.vo.MatchRecord"/>
+		<typeAlias alias="MatchCrew" type="com.doogwal.coffee.vo.MatchCrew"/>
+		<typeAlias alias="FellowshipCrew" type="com.doogwal.coffee.vo.FellowshipCrew"/>
+		
+		
+</typeAliases>
+<!--  데이터 베이스와 연결 환경 설정 -->
+<environments default="development">
+	<environment id="development">
+		<transactionManager type="JDBC"/>
+		<!--  mybatis dataSource 클래스가 -->
+		<dataSource type="JNDI">
+			<!-- corba -->
+			<property name="data_source" value="java:comp/env/oraclexe"/>
+			<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+			<property name="driver" value ="oracle.jdbc.OracleDriver" />
+			<property name="username" value="saemo" />
+			<property name="password" value="1111" />
+		</dataSource>
+	</environment>
+</environments>
+
+<!--  mapper 경로 설정 '/' -->
+<mappers>
+		<mapper resource="com/doogwal/coffee/mapper/districts.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/gatherings.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/users.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/schedules.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/crews.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/preparations.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/records.xml" />
+		<mapper resource="com/doogwal/coffee/mapper/fellowships.xml" />
+</mappers>
+</configuration>

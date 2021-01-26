@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	
+"-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="schedules">
+<insert id="insert" parameterType="Gathering">
+	<selectKey order="BEFORE" resultType="int" keyProperty="no">
+		SELECT schedules_seq.nextval
+		FROM dual
+	</selectKey>
+	INSERT INTO schedules(no, start_date, end_date, name, address, description, lat, lng, regdate, district_no, type, crew_no)
+	VALUES(#{no}, #{startDate}, #{endDate}, #{name}, #{address}, #{description}, #{lat}, #{lng}, systimestamp, #{districtNo}, #{type}, #{crewNo})
+</insert>
+
+
+<select id="selectOne" resultType="Gathering" parameterType="int">
+	SELECT district_no districtNo,crew_no crewNo,type,start_date startDate,end_date endDate,name,address,description,lat,lng
+	FROM schedules
+	WHERE no=#{no}
+</select>
+
+<!-- 20210124 밋팅히스토리(대결,친목) 카운트 이아림 -->
+<select id="selectHistoryCount" parameterType="int" resultType="map" >
+SELECT(SELECT count(*)
+FROM schedules s, meet_apps m
+WHERE s.no = m.meeting_no
+AND s.type = 'M'
+AND m.acceptance = 'A'
+AND systimestamp > s.end_date
+AND 
+(s.crew_no = #{crewNo} or m.apply_crew_no = #{crewNo}) ) MATCHCOUNT,
+(SELECT count(*)
+FROM schedules s, meet_apps m
+WHERE s.no = m.meeting_no
+AND s.type = 'F'
+AND m.acceptance = 'A'
+AND systimestamp > s.end_date
+AND 
+(s.crew_no = #{crewNo} or m.apply_crew_no = #{crewNo}) ) FELLOWSHIPCOUNT
+FROM dual
+<!--// 20210124 밋팅히스토리(대결,친목) 카운트 이아림 -->
+	 
+</select>
+</mapper> 

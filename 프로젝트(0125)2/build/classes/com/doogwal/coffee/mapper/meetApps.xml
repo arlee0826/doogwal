@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC	
+"-//mybatis.org//DTD Mapper 3.0//EN"	
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="meetApps">
+<!--박형우 start-->
+<!--20210114 start-->
+<select id="weApplymeetingList" parameterType="int" resultType="Meeting">
+SELECT meetings.img, schedules.name, schedules.description, schedules.type
+FROM meet_apps JOIN meetings ON meet_apps.meeting_no = meetings.no JOIN schedules ON schedules.no = meetings.no
+WHERE meet_apps.apply_crew_no = #{no} AND NOT meet_apps.acceptance='R' AND SYSDATE &lt; schedules.start_date
+</select>
+<!--20210114 end-->
+<!--박형우 end-->
+
+
+
+</mapper>  
