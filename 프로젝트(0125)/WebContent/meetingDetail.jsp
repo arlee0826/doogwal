@@ -407,7 +407,6 @@ $applyCrewList.html(applyCrewsTmpl({crew : json}));
 
 
 $(".btn_apply").click(function() {
-	
 	$("#meetingRequestPop").addClass("appear");
 	$html.addClass("on");
 });
@@ -519,7 +518,11 @@ $(".times").click(function () {
     	  if (RemainDate < 0) {      
     	    // 시간이 종료 되었으면..
     	    clearInterval(tid);   // 타이머 해제
-    	    m = "마감"
+    	    m = "";
+    	    	$(".choosing_btn").hide();
+    	  		$(".btn_apply").hide();
+    	  		$(".application_deadline").text("기간 만료");
+    	  		$(".time_remaining").text("기간 만료").css({"margin-top":"20px","font-size":"30px","font-weight":"900","color":"red"});
     	  }else{
     	    RemainDate = RemainDate - 1000; // 남은시간 -1초
     	  }

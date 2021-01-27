@@ -23,13 +23,19 @@ public class Meeting {
 		
 		
 		public String getStartDateDetail() {
-			SimpleDateFormat format1 = new SimpleDateFormat("YYYY년 MM월 DD일 a hh:mm");
+			SimpleDateFormat format1 = new SimpleDateFormat("YYYY년 MM월 DD일 a hh:mm ");
 			return format1.format(this.startDate);
 		}
 		
 		public String getRegDate() {
-			SimpleDateFormat format1 = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss");
-			return format1.format(this.regdate);
+			
+			Timestamp sevenDaysLater = Timestamp.from(regdate.toInstant());
+			Calendar c = Calendar.getInstance();
+			c.setTime(regdate); // 캘린더의 날짜를 regdate로 수정
+			c.add(Calendar.DATE, 7); // 캘린더의 날짜에 7일을 더함
+			sevenDaysLater.setTime(c.getTimeInMillis()); // 캘린더의 날짜를 통해 sevenDaysLater의 값을 재설정함
+			SimpleDateFormat format1 = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+			return format1.format(sevenDaysLater);
 		}
 		
 		public Meeting() {
